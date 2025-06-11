@@ -1,0 +1,34 @@
+﻿@page
+@model Pages.Memories.CreateModel
+@{
+    ViewData["Title"] = "Crear Recuerdo";
+}
+
+<h1>Crear Recuerdo</h1>
+
+<form method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label>Título</label>
+        <input asp-for="Memory.Title" class="form-control" required />
+        <span asp-validation-for="Memory.Title" class="text-danger" />
+    </div>
+
+    <div class="form-group">
+        <label>Texto</label>
+        <textarea asp-for="Memory.Text" class="form-control"></textarea> <!-- Campo opcional -->
+        <span asp-validation-for="Memory.Text" class="text-danger" />
+    </div>
+
+    <div class="form-group">
+        <label>Fecha</label>
+        <input asp-for="Memory.Date" type="date" class="form-control" />
+        <span asp-validation-for="Memory.Date" class="text-danger" />
+    </div>
+
+    <div class="form-group">
+        <label>Archivos multimedia</label>
+        <input type="file" name="Files" multiple class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar</button>
+</form>

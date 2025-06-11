@@ -1,0 +1,188 @@
+﻿@page
+@model Pages.Memories.IndexModel
+
+@{
+    ViewData["Title"] = "Mis Recuerdos";
+}
+
+<div class="album-container">
+    <div class="album-header text-center">
+        <h1 class="display-4">🌸 Diario 🌸</h1>
+        <p class="lead">Siempre quise que supieras de mi</p>
+    </div>
+
+    <div class="memory-gallery">
+        @foreach (var memory in Model.Memories)
+        {
+            <div class="memory-card">
+                <div class="memory-header">
+                    <h2>@memory.Title</h2>
+                    <p class="memory-date">@memory.Date.ToString("MMMM dd, yyyy")</p>
+                </div>
+
+                <div class="memory-footer text-center">
+                    <a href="/Memories/Details/@memory.Id?page=@Model.Page" class="btn btn-primary">Ver más</a>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="d-flex justify-content-between mt-5">
+        @if (Model.Page > 1)
+        {
+            <a href="/Memories?Page=@(Model.Page - 1)" class="pagination-arrow text-decoration-none">
+                <div class="d-flex align-items-center">
+                    <span class="fs-2">&#8592;</span>
+                </div>
+            </a>
+        }
+        else
+        {
+            <div></div>
+        }
+
+        @if (Model.Page < Model.TotalPages)
+        {
+            <a href="/Memories?Page=@(Model.Page + 1)" class="pagination-arrow text-decoration-none">
+                <div class="d-flex align-items-center">
+                    <span class="fs-2">&#8594;</span>
+                </div>
+            </a>
+        }
+        else
+        {
+            <div></div>
+        }
+    </div>
+
+</div>
+
+<style>
+    body {
+        background: linear-gradient(135deg, #f9d3e6, #f6b3e4);
+        font-family: 'Georgia', serif;
+        color: #555;
+    }
+
+    .album-container {
+        max-width: 1200px;
+        margin: 30px auto;
+        padding: 15px;
+        padding-bottom: 60px; /* Añadir espacio al fondo */
+    }
+
+    .album-header h1 {
+        font-size: 3rem;
+        font-weight: bold;
+        color: #a573a8;
+    }
+
+    .album-header p {
+        font-size: 1.25rem;
+        color: #6a4c9c;
+    }
+
+    .memory-gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+        padding-top: 20px;
+    }
+
+    .memory-card {
+        display: flex;
+        flex-direction: column; /* Apilar los elementos en columna */
+        background: #a573a8;
+        border-radius: 15px;
+        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        transition: transform 0.3s ease-in-out;
+        height: 100%; /* Asegura que la tarjeta ocupe todo el alto disponible */
+    }
+
+        .memory-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 18px rgba(0, 0, 0, 0.2);
+        }
+
+    .memory-header {
+        background-color: #a573a8;
+        color: #fff;
+        padding: 15px;
+        border-radius: 15px 15px 0 0;
+        text-align: center;
+    }
+
+        .memory-header h2 {
+            margin: 0;
+            font-size: 1.75rem;
+        }
+
+    .memory-date {
+        font-size: 1rem;
+        margin-top: 10px;
+        font-style: italic;
+    }
+
+    .memory-footer {
+        padding: 15px;
+        background-color: #f6b3e4;
+        border-radius: 0 0 15px 15px;
+        margin-top: auto; /* Asegura que el footer siempre esté en el fondo */
+    }
+
+    .btn-outline-primary {
+        background-color: transparent;
+        color: #a573a8;
+        border: 1px solid #a573a8;
+        font-weight: bold;
+        padding: 8px 16px;
+        border-radius: 25px;
+    }
+
+        .btn-outline-primary:hover {
+            background-color: #a573a8;
+            color: white;
+        }
+
+    .btn-primary {
+        background-color: #a573a8;
+        color: white;
+        font-weight: bold;
+        padding: 8px 16px;
+        border-radius: 25px;
+    }
+
+        .btn-primary:hover {
+            background-color: #9a4c88;
+            transform: scale(1.1);
+        }
+
+    /* Flechas de Paginación */
+    .pagination-arrow {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 20px;
+        background-color: #f6b3e4;
+        border-radius: 50%;
+        transition: all 0.3s ease;
+    }
+
+        .pagination-arrow:hover {
+            background-color: #a573a8;
+            transform: scale(1.2);
+        }
+
+        .pagination-arrow span {
+            font-size: 2rem;
+            color: #9a4c88; /* Color suave de la paleta */
+            transition: color 0.3s ease;
+        }
+
+        .pagination-arrow:hover span {
+            color: white;
+        }
+
+</style>
+
